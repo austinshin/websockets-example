@@ -1,0 +1,25 @@
+<html>
+
+<body>
+  <label>send message to server</label>
+  <input id="inputBox"></input>
+  <button id="send">send</button>
+  <br /> text from server:
+  <span id="response"></span>
+  <script type="text/javascript">
+    // connect to websocket server
+    let socket = new WebSocket('ws://127.0.0.1:8080');
+
+    // event handler when client recieves a message from server
+    socket.onmessage = (event) => {
+      document.getElementById("response").innerText = event.data;
+    };
+
+    document.getElementById("send").onclick = (event) => {
+      // using websocket to send data to server
+      socket.send(JSON.stringify(document.getElementById("inputBox").value));
+    };
+  </script>
+</body>
+
+</html>
